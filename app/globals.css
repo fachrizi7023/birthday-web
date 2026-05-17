@@ -1,0 +1,445 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  background: black;
+  overflow: hidden;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =========================
+   HOME
+========================= */
+.home {
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+  position: relative;
+
+  background:
+    radial-gradient(circle at top, #2b2b2b 0%, #000 70%);
+}
+
+.fade-out {
+  opacity: 0;
+  transition: 0.7s ease;
+  transform: scale(1.03);
+}
+
+/* ambient blur */
+.ambient {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+}
+
+.ambient1 {
+  width: 400px;
+  height: 400px;
+  background: rgba(255,255,255,0.06);
+
+  top: -100px;
+  left: -100px;
+}
+
+.ambient2 {
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.04);
+
+  bottom: -50px;
+  right: -50px;
+}
+
+/* letter */
+.letter {
+  width: 190px;
+  height: 190px;
+
+  border-radius: 34px;
+
+  backdrop-filter: blur(14px);
+
+  background: rgba(255,255,255,0.08);
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+  font-size: 78px;
+
+  cursor: pointer;
+
+  transition: 0.4s ease;
+
+  animation: float 3s ease-in-out infinite;
+
+  z-index: 10;
+}
+
+.letter:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.12);
+}
+
+.letter p {
+  margin-top: 10px;
+
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0%,100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* =========================
+   STORY
+========================= */
+.story {
+  height: 100vh;
+  overflow-y: auto;
+
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.slide {
+  min-height: 100vh;
+
+  position: relative;
+
+  overflow: hidden;
+
+  scroll-snap-align: start;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: black;
+}
+
+.heroImage {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  opacity: 0;
+
+  transform: scale(1.15);
+
+  transition:
+    opacity 1.8s ease,
+    transform 6s ease;
+}
+
+.heroImage.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.darkOverlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0,0,0,0.8),
+      rgba(0,0,0,0.25)
+    );
+
+  z-index: 1;
+}
+
+.overlayText {
+  position: relative;
+  z-index: 2;
+
+  width: 85%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  color: white;
+}
+
+.overlayText div:first-child {
+  font-family: "Playfair Display", serif;
+
+  font-size: clamp(58px, 9vw, 130px);
+
+  line-height: 0.9;
+
+  font-weight: 700;
+}
+
+.yearText {
+  font-size: clamp(20px, 3vw, 38px);
+  opacity: 0.8;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+/* =========================
+   SPLIT
+========================= */
+.split {
+  display: flex;
+  background: white;
+}
+
+.leftPane {
+  width: 50%;
+
+  padding: 90px 70px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 20px;
+}
+
+.leftPane h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 54px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.leftPane p {
+  line-height: 1.9;
+  opacity: 0.75;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.rightPane {
+  width: 50%;
+
+  padding: 60px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightPane img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 24px;
+}
+
+/* =========================
+   FINAL
+========================= */
+.final {
+  background: #0d0d0d;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  color: white;
+}
+
+.finalWrap {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 1s ease;
+}
+
+.finalWrap.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.final h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.final p {
+  opacity: 0.7;
+}
+
+/* =========================
+   ANIMATION
+========================= */
+.reveal,
+.revealUp,
+.revealImg {
+  opacity: 0;
+
+  transition:
+    all 1.2s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.reveal {
+  transform: translateY(40px);
+}
+
+.revealUp {
+  transform: translateY(60px);
+}
+
+.revealImg {
+  transform: scale(1.08);
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.delay1 {
+  transition-delay: 0.35s;
+}
+
+/* =========================
+   BUTTON
+========================= */
+.videoBtn {
+  margin-top: 28px;
+
+  padding: 14px 32px;
+
+  border-radius: 999px;
+
+  border: 1px solid white;
+
+  background: white;
+  color: black;
+
+  font-size: 15px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+
+  transition: 0.35s ease;
+}
+
+.videoBtn:hover {
+  background: transparent;
+  color: white;
+
+  transform: translateY(-3px);
+}
+
+/* =========================
+   VIDEO MODAL
+========================= */
+.videoModal {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.95);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+
+  transform: scale(1.03);
+
+  transition: 0.35s ease;
+
+  z-index: 9999;
+}
+
+.videoModal.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 768px) {
+
+  .overlayText {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    gap: 20px;
+  }
+
+  .split {
+    flex-direction: column;
+  }
+
+  .leftPane,
+  .rightPane {
+    width: 100%;
+    padding: 32px;
+  }
+
+  .rightPane {
+    height: 50vh;
+  }
+
+  .leftPane h2 {
+    font-size: 40px;
+  }
+
+  .final h2 {
+    font-size: 42px;
+  }
+
+}
