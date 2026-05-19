@@ -174,7 +174,7 @@ export default function Story() {
           onClick={closeVideo}
         >
           <video autoPlay controls>
-            <source src="/video.mp4" />
+            <source src="https://drive.google.com/uc?export=download&id=1xI-U7Y-UaDzqUD4OilSDnJr15MrLGZDs" />
           </video>
         </div>
       )}
