@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
    SCROLL ACTIVE HOOK
 ========================= */
 function useScrollActive() {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -72,7 +72,7 @@ export default function Story() {
         <section className="slide hero">
 
           <img
-            ref={s1img.ref}
+            ref={s1img.ref as React.RefObject<HTMLImageElement>}
             src="/foto1.jpg"
             className={`heroImage ${s1img.active ? "show" : ""}`}
           />
@@ -82,7 +82,7 @@ export default function Story() {
           <div className="overlayText">
 
             <div
-              ref={s1a.ref}
+              ref={s1a.ref as React.RefObject<HTMLDivElement>}
               className={`reveal ${s1a.active ? "show" : ""}`}
             >
               Happy
@@ -91,7 +91,7 @@ export default function Story() {
             </div>
 
             <div
-              ref={s1b.ref}
+              ref={s1b.ref as React.RefObject<HTMLDivElement>}
               className={`reveal delay1 yearText ${s1b.active ? "show" : ""}`}
             >
               sweet seventeen
@@ -109,14 +109,14 @@ export default function Story() {
           <div className="leftPane">
 
             <h2
-              ref={s2a.ref}
+              ref={s2a.ref as React.RefObject<HTMLHeadingElement>}
               className={`revealUp ${s2a.active ? "show" : ""}`}
             >
               A Little Story
             </h2>
 
             <p
-              ref={s2b.ref}
+              ref={s2b.ref as React.RefObject<HTMLParagraphElement>}
               className={`revealUp delay1 ${s2b.active ? "show" : ""}`}
             >
               Another year older, another year more beautiful.
@@ -130,7 +130,7 @@ export default function Story() {
           <div className="rightPane">
 
             <img
-              ref={s2c.ref}
+              ref={s2c.ref as React.RefObject<HTMLImageElement>}
               src="/foto2.jpg"
               className={`revealImg ${s2c.active ? "show" : ""}`}
             />
@@ -145,7 +145,7 @@ export default function Story() {
         <section className="slide final">
 
           <div
-            ref={finalText.ref}
+            ref={finalText.ref as React.RefObject<HTMLDivElement>}
             className={`finalWrap ${finalText.active ? "show" : ""}`}
           >
 
