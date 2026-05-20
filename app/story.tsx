@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 /* =========================
    SCROLL ACTIVE HOOK
 ========================= */
-function useScrollActive() {
-  const ref = useRef<HTMLElement | null>(null);
+function useScrollActive<T extends HTMLElement>() {
+  const ref = useRef<T | null>(null);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    const obs = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       ([entry]) => {
         setActive(entry.isIntersecting);
       },
@@ -19,24 +19,28 @@ function useScrollActive() {
       }
     );
 
-    if (ref.current) obs.observe(ref.current);
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
 
-    return () => obs.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   return { ref, active };
 }
 
 export default function Story() {
-  const s1img = useScrollActive();
-  const s1a = useScrollActive();
-  const s1b = useScrollActive();
+  const s1img = useScrollActive<HTMLImageElement>();
+  const s1a = useScrollActive<HTMLDivElement>();
+  const s1b = useScrollActive<HTMLDivElement>();
 
-  const s2a = useScrollActive();
-  const s2b = useScrollActive();
-  const s2c = useScrollActive();
+  const s2a = useScrollActive<HTMLHeadingElement>();
+  const s2b = useScrollActive<HTMLParagraphElement>();
+  const s2c = useScrollActive<HTMLImageElement>();
 
-  const finalText = useScrollActive();
+  const finalText = useScrollActive<HTMLDivElement>();
 
   const [showVideo, setShowVideo] = useState(false);
   const [videoFade, setVideoFade] = useState(false);
@@ -61,7 +65,7 @@ export default function Story() {
     <>
       {/* MUSIC */}
       <audio autoPlay loop>
-        <source src="/music.mp3" />
+        <source src="/music.mp3" type="audio/mpeg" />
       </audio>
 
       <div className="story">
@@ -72,8 +76,9 @@ export default function Story() {
         <section className="slide hero">
 
           <img
-            ref={s1img.ref as React.RefObject<HTMLImageElement>}
+            ref={s1img.ref}
             src="/foto1.jpg"
+            alt="Birthday"
             className={`heroImage ${s1img.active ? "show" : ""}`}
           />
 
@@ -82,7 +87,7 @@ export default function Story() {
           <div className="overlayText">
 
             <div
-              ref={s1a.ref as React.RefObject<HTMLDivElement>}
+              ref={s1a.ref}
               className={`reveal ${s1a.active ? "show" : ""}`}
             >
               Happy
@@ -91,7 +96,7 @@ export default function Story() {
             </div>
 
             <div
-              ref={s1b.ref as React.RefObject<HTMLDivElement>}
+              ref={s1b.ref}
               className={`reveal delay1 yearText ${s1b.active ? "show" : ""}`}
             >
               sweet seventeen
@@ -109,14 +114,14 @@ export default function Story() {
           <div className="leftPane">
 
             <h2
-              ref={s2a.ref as React.RefObject<HTMLHeadingElement>}
+              ref={s2a.ref}
               className={`revealUp ${s2a.active ? "show" : ""}`}
             >
               A Little Story
             </h2>
 
             <p
-              ref={s2b.ref as React.RefObject<HTMLParagraphElement>}
+              ref={s2b.ref}
               className={`revealUp delay1 ${s2b.active ? "show" : ""}`}
             >
               Another year older, another year more beautiful.
@@ -130,8 +135,9 @@ export default function Story() {
           <div className="rightPane">
 
             <img
-              ref={s2c.ref as React.RefObject<HTMLImageElement>}
+              ref={s2c.ref}
               src="/foto2.jpg"
+              alt="Memory"
               className={`revealImg ${s2c.active ? "show" : ""}`}
             />
 
@@ -145,7 +151,7 @@ export default function Story() {
         <section className="slide final">
 
           <div
-            ref={finalText.ref as React.RefObject<HTMLDivElement>}
+            ref={finalText.ref}
             className={`finalWrap ${finalText.active ? "show" : ""}`}
           >
 
@@ -174,7 +180,10 @@ export default function Story() {
           onClick={closeVideo}
         >
           <video autoPlay controls>
-            <source src="https://drive.google.com/uc?export=download&id=1xI-U7Y-UaDzqUD4OilSDnJr15MrLGZDs" />
+            <source
+              src="https://drive.google.com/uc?export=download&id=1xI-U7Y-UaDzqUD4OilSDnJr15MrLGZDs"
+              type="video/mp4"
+            />
           </video>
         </div>
       )}
